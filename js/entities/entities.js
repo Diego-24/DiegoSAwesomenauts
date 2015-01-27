@@ -55,16 +55,20 @@ game.PlayerEntity = me.Entity.extend({
 
 game.PlayerBaseEntity = me.Entity.extend({
 	init : function(x, y, settings){
+		/*reaches to the constructor of Entity*/
 		this._super(me,Entity, 'init', [x, y, {
+			/*chooses the tower and sets the size*/
 			image: "tower",
 			width: 100,
 			height: 100,
 			spritewidth: "100",
 			spriteheight: "100",
 			getShape: function() {
+				/*sets the rectangle the tower is in*/
 				return (new me.Rect(0, 0, 100, 100)).toPolygon();
 			}
 		}]);
+		/*stes the health of the tower*/
 		this.broken = false;
 		this.health = 10;
 		this.alwaysUpdate = true;
@@ -73,6 +77,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.type = "PlayerBaseEntity";
 	},
 
+	/*sets what happens when the tower health is at 0*/
 	update:function(delta) {
 		if(this.health<=0) {
 			this.broken = true;
@@ -91,16 +96,20 @@ game.PlayerBaseEntity = me.Entity.extend({
 
 game.EnemyBaseEntity = me.Entity.extend({
 	init : function(x, y, settings){
+		/*reaches to the constructor of Entity*/
 		this._super(me,Entity, 'init', [x, y, {
+			/*chooses the tower and sets the size*/
 			image: "tower",
 			width: 100,
 			height: 100,
 			spritewidth: "100",
 			spriteheight: "100",
 			getShape: function() {
+				/*sets the rectangle the tower is in*/
 				return (new me.Rect(0, 0, 100, 100)).toPolygon();
 			}
 		}]);
+		/*stes the health of the tower*/
 		this.broken = false;
 		this.health = 10;
 		this.alwaysUpdate = true;
@@ -109,6 +118,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 		this.type = "EnemyBaseEntity";
 	},
 
+	/*sets what happens when the tower health is at 0*/
 	update:function(delta) {
 		if(this.health<=0) {
 			this.broken = true;

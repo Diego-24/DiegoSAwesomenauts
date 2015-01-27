@@ -10,7 +10,7 @@ game.resources = [
 	 {name: "meta-tiles", type:"image", src: "data/img/meta-tiles.png"},
 	 /*loads the character*/
 	 {name: "player", type:"image", src: "data/img/orcSpear.png"},
-	 
+	 /*loads the tower pictures*/
 	 {name: "tower", type:"image", src: "data/img/tower_round.svg.png"},
 
 	/* Atlases 
