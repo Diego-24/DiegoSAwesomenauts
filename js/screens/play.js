@@ -16,6 +16,7 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		/*binds the right key so when pressed it moves right*/
 		me.input.bindKey(me.input.KEY.RIGHT, "right");
+		/*binds the A key so when pressed the player attacks*/
 		me.input.bindKey(me.input.KEY.A, "attack");
 
 		// add our HUD to the game world
