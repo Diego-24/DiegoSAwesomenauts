@@ -41,6 +41,7 @@ var game = {
 	"loaded" : function () {
 		/*registers the player*/
 		me.pool.register("player", game.PlayerEntity, true);
+		/*registers both the player base and enemy base*/
 		me.pool.register("PlayerBase", game.PlayerBaseEntity);
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
 

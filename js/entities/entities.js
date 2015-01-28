@@ -15,6 +15,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 
 		this.body.setVelocity(5, 20);
+		/*the camera follows the player*/
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 		/*adds the pictures of the character*/
@@ -77,8 +78,10 @@ game.PlayerBaseEntity = me.Entity.extend({
 
 		this.type = "PlayerBaseEntity";
 
+		/*adds the pictures of the tower*/
 		this.renderable.addAnimation("idle", [0]);
 		this.renderable.addAnimation("broken", [1]);
+		/*sets the first picture of the tower*/
 		this.renderable.setCurrentAnimation("idle");
 	},
 
@@ -86,6 +89,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 	update:function(delta) {
 		if(this.health<=0) {
 			this.broken = true;
+			/*sets the picture of the burning tower when the health is at zero*/
 			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
@@ -123,8 +127,10 @@ game.EnemyBaseEntity = me.Entity.extend({
 
 		this.type = "EnemyBaseEntity";
 
+		/*adds the pictures of the tower*/
 		this.renderable.addAnimation("idle", [0]);
 		this.renderable.addAnimation("broken", [1]);
+		/*sets the first picture of the tower*/
 		this.renderable.setCurrentAnimation("idle");
 	},
 
@@ -132,6 +138,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 	update:function(delta) {
 		if(this.health<=0) {
 			this.broken = true;
+			/*sets the picture of the burning tower when the health is at zero*/
 			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
