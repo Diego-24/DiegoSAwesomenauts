@@ -27,15 +27,23 @@ game.PlayerEntity = me.Entity.extend({
 	},
 
 	update: function(delta) {
-		if(me.input.isKeyPressed("right")){
+		if(me.input.isKeyPressed("right")) {
 			/*adds to the position of my x by adding the velocity defined above in*/
 			/*setVelocity() and multiplying it by me.timer.tick.*/
 			/*me.timer.tick makes the movement look smooth*/
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
 			/*flips the pictures of the character*/
 			this.flipX(true);
+		}else if(me.input.isKeyPressed("left")) {
+			this.body.vel.x -= this.body.accel.x * me.timer.tick;
+			this.flipX(false);
 		}else{
 			this.body.vel.x = 0;
+		}
+
+		if(me.input.isKeyPressed("jump") && !this.jumping && !this.falling) {
+			this.jumping = true;
+			this.body.vel.y -= this.body.accel.y * me.timer.tick;
 		}
 
 		if(me.input.isKeyPressed("attack")) {
@@ -92,7 +100,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 			spriteheight: "100",
 			getShape: function() {
 				/*sets the rectangle the tower is in*/
-				return (new me.Rect(0, 0, 100, 100)).toPolygon();
+				return (new me.Rect(0, 0, 100, 65)).toPolygon();
 			}
 		}]);
 		/*stes the health of the tower*/
@@ -141,7 +149,7 @@ game.EnemyBaseEntity = me.Entity.extend({
 			spriteheight: "100",
 			getShape: function() {
 				/*sets the rectangle the tower is in*/
-				return (new me.Rect(0, 0, 100, 100)).toPolygon();
+				return (new me.Rect(0, 0, 100, 65)).toPolygon();
 			}
 		}]);
 		/*stes the health of the tower*/
