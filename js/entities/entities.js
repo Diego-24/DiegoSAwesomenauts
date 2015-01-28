@@ -15,6 +15,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 
 		this.body.setVelocity(5, 20);
+		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
 		/*adds the pictures of the character*/
 		this.renderable.addAnimation("idle", [78]);
@@ -56,7 +57,7 @@ game.PlayerEntity = me.Entity.extend({
 game.PlayerBaseEntity = me.Entity.extend({
 	init : function(x, y, settings){
 		/*reaches to the constructor of Entity*/
-		this._super(me,Entity, 'init', [x, y, {
+		this._super(me.Entity, 'init', [x, y, {
 			/*chooses the tower and sets the size*/
 			image: "tower",
 			width: 100,
@@ -75,12 +76,17 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this);
 
 		this.type = "PlayerBaseEntity";
+
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1]);
+		this.renderable.setCurrentAnimation("idle");
 	},
 
 	/*sets what happens when the tower health is at 0*/
 	update:function(delta) {
 		if(this.health<=0) {
 			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 	
@@ -97,7 +103,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 game.EnemyBaseEntity = me.Entity.extend({
 	init : function(x, y, settings){
 		/*reaches to the constructor of Entity*/
-		this._super(me,Entity, 'init', [x, y, {
+		this._super(me.Entity, 'init', [x, y, {
 			/*chooses the tower and sets the size*/
 			image: "tower",
 			width: 100,
@@ -116,12 +122,17 @@ game.EnemyBaseEntity = me.Entity.extend({
 		this.body.onCollision = this.onCollision.bind(this);
 
 		this.type = "EnemyBaseEntity";
+
+		this.renderable.addAnimation("idle", [0]);
+		this.renderable.addAnimation("broken", [1]);
+		this.renderable.setCurrentAnimation("idle");
 	},
 
 	/*sets what happens when the tower health is at 0*/
 	update:function(delta) {
 		if(this.health<=0) {
 			this.broken = true;
+			this.renderable.setCurrentAnimation("broken");
 		}
 		this.body.update(delta);
 	
