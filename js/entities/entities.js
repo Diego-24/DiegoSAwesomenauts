@@ -86,6 +86,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}
 
+		/*tells it to check the collision*/
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
 		this.body.update(delta);
 
@@ -93,6 +94,7 @@ game.PlayerEntity = me.Entity.extend({
 		return true;
 	},
 
+	/*sets the collision between the tower and the player so you can't go through*/
 	collideHandler: function(response) {
 		if(response.b.type==='EnemyBaseEntity') {
 			var ydif = this.pos.y - response.b.pos.y;
