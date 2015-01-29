@@ -218,17 +218,21 @@ game.EnemyBaseEntity = me.Entity.extend({
 });
 
 game.EnemyCreep = me.Entity.extend({
-	init: function(x, y, settings) {
+		init: function(x, y, settings) {
+			/*reaches to the constructor of Entity*/
 		this._super(me.Entity, 'init', [x, y, {
+			/*chooses the creep and sets its size*/
 			image: "creep1",
 			width: 32,
 			height: 64,
 			spritewidth: "32",
 			spriteheight: "64",
 			getShape: function() {
+				/*sets the rectangle the player can walk into*/
 				return (new me.Rect(0, 0, 32, 64)).toPolygon();
 			}
 		}]);
+		/*gives it a health*/
 		this.health = 10;
 		this.alwaysUpdate = true;
 
@@ -236,6 +240,7 @@ game.EnemyCreep = me.Entity.extend({
 
 		this.type = "EnemyCreep";
 
+		/*adds the pictures of the creep*/
 		this.renderable.addAnimation("walk", [3, 4, 5], 80);
 		this.renderable.setCurrentAnimation("walk");
 
