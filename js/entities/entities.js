@@ -251,6 +251,7 @@ game.EnemyCreep = me.Entity.extend({
 	}
 });
 
+/*puts the creep on a timer*/
 game.GameManager = Object.extend({
 	init: function(x, y, settings) {
 		this.now = new Date().getTime();

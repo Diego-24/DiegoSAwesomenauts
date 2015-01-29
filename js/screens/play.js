@@ -15,6 +15,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		me.game.world.addChild(player, 5);
 
 		var gamemanager = me.pool.pull("GameManager", 0, 0, {});
+		/*adds the gamemanager to the game*/
 		me.game.world.addChild(gamemanager, 0);
 
 		/*binds the right key so when pressed the player moves right*/

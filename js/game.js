@@ -46,6 +46,7 @@ var game = {
 		me.pool.register("EnemyBase", game.EnemyBaseEntity);
 		/*registers the creep*/
 		me.pool.register("EnemyCreep", game.EnemyCreep, true);
+		/*registers the GameManager*/
 		me.pool.register("GameManager", game.GameManager);
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
