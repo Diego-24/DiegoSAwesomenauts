@@ -34,13 +34,14 @@ game.PlayerEntity = me.Entity.extend({
 			this.body.vel.x += this.body.accel.x * me.timer.tick;
 			/*flips the pictures of the character*/
 			this.flipX(true);
+		/*does everything as the 'right' if statement except it's doing it for 'left'*/
 		}else if(me.input.isKeyPressed("left")) {
 			this.body.vel.x -= this.body.accel.x * me.timer.tick;
 			this.flipX(false);
 		}else{
 			this.body.vel.x = 0;
 		}
-
+		/*allows you to jump by pressing up but not when you're falling or already jumping*/
 		if(me.input.isKeyPressed("jump") && !this.jumping && !this.falling) {
 			this.jumping = true;
 			this.body.vel.y -= this.body.accel.y * me.timer.tick;
