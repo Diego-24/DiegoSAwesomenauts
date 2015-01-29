@@ -17,6 +17,9 @@ game.PlayerEntity = me.Entity.extend({
 		this.body.setVelocity(6, 20);
 		/*keeps track of which direction your character is going*/
 		this.facing = "right";
+		this.now = new Date().getTime();
+		this.lastHit = this.now;
+		this.lastAttack = new Date().getTime(); /*haven't used this*/
 		/*the camera follows the player*/
 		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
 
@@ -29,6 +32,7 @@ game.PlayerEntity = me.Entity.extend({
 	},
 
 	update: function(delta) {
+		this.now = new Date().getTime();
 		if(me.input.isKeyPressed("right")) {
 			/*adds to the position of my x by adding the velocity defined above in*/
 			/*setVelocity() and multiplying it by me.timer.tick.*/
@@ -64,26 +68,13 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}
 		/*sets the animation 'walk'*/
-		else if(this.body.vel.x !== 0) {
+		else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
 			if(!this.renderable.isCurrentAnimation("walk")) {
 				this.renderable.setCurrentAnimation("walk");
 			}
-		}else{
+		}else if(!this.renderable.isCurrentAnimation("attack")) {
 			/*when staying still, it sets the animation 'idle'*/
 			this.renderable.setCurrentAnimation("idle");
-		}
-
-		if(me.input.isKeyPressed("attack")) {
-			if(!this.renderable.isCurrentAnimation("attack")) {
-				console.log(!this.renderable.isCurrentAnimation("attack"));
-				/*Sets the current animation to attack and once that is over*/
-				/*goes back to the idle animation*/
-				this.renderable.setCurrentAnimation("attack", "idle");
-				/*Makes it so that the next time we start this sequence we begin*/
-				/*from the first animation, not whatever we left off when we*/
-				/*switched to another animation*/
-				this.renderable.setAnimationFrame();
-			}
 		}
 
 		/*tells it to check the collision*/
@@ -113,6 +104,12 @@ game.PlayerEntity = me.Entity.extend({
 				this.body.vel.x = 0;
 				this.pos.x = this.pos.x +1;
 
+			}
+		
+			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 900) {
+				console.log("tower Hit");
+				this.lastHit = this.now;
+				response.b.loseHealth();
 			}
 		}
 	}
@@ -212,6 +209,10 @@ game.EnemyBaseEntity = me.Entity.extend({
 
 	onCollision: function() {
 		
+	},
+
+	loseHealth: function() {
+		this.health--;
 	}
 
 });
