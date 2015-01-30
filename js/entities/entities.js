@@ -14,7 +14,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}]);
 
-		this.body.setVelocity(6, 20);
+		this.body.setVelocity(3, 20);
 		/*keeps track of which direction your character is going*/
 		this.facing = "right";
 		this.now = new Date().getTime();
@@ -26,7 +26,7 @@ game.PlayerEntity = me.Entity.extend({
 		/*adds the pictures of the character*/
 		this.renderable.addAnimation("idle", [78]);
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
-		this.renderable.addAnimation("attack", [65, 66, 67, 68, 69, 70, 71, 72], 80);
+		this.renderable.addAnimation("attack", [221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234], 80);
 
 		this.renderable.setCurrentAnimation("idle");
 	},
