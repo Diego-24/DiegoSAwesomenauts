@@ -14,7 +14,7 @@ game.PlayerEntity = me.Entity.extend({
 			}
 		}]);
 
-		this.body.setVelocity(3, 20);
+		this.body.setVelocity(3, 10);
 		/*keeps track of which direction your character is going*/
 		this.facing = "right";
 		this.now = new Date().getTime();
@@ -246,8 +246,15 @@ game.EnemyCreep = me.Entity.extend({
 
 	},	
 
-	update: function() {
+	update: function(delta) {
+		this.body.vel.x -= this.body.accel.x * me.timer.tick;
 
+		this.body.update(delta);
+	
+
+		this._super(me.Entity, "update", [delta]);
+
+		return true;
 	}
 });
 
