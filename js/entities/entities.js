@@ -245,7 +245,7 @@ game.EnemyCreep = me.Entity.extend({
 		this.renderable.setCurrentAnimation("walk");
 
 	},	
-
+	/*makes the creep move*/
 	update: function(delta) {
 		this.body.vel.x -= this.body.accel.x * me.timer.tick;
 
