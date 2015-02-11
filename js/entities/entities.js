@@ -15,7 +15,7 @@ game.PlayerEntity = me.Entity.extend({
 		}]);
 		this.type = "PlayerEntity";
 		this.health = 20;
-		this.body.setVelocity(3, 10);
+		this.body.setVelocity(3, 20);
 		/*keeps track of which direction your character is going*/
 		this.facing = "right";
 		this.now = new Date().getTime();
@@ -52,7 +52,7 @@ game.PlayerEntity = me.Entity.extend({
 		}
 		/*allows you to jump by pressing up but not when you're falling or already jumping*/
 		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
-			this.jumping = true;
+			this.body.jumping = true;
 			this.body.vel.y -= this.body.accel.y * me.timer.tick;
 		}
 
@@ -274,6 +274,14 @@ game.EnemyCreep = me.Entity.extend({
 
 		this.body.update(delta);
 	
+
+
+		if(!this.body.jumping && !this.body.falling) {
+			this.body.jumping = true;
+			this.body.vel.y -= this.body.accel.y * me.timer.tick;
+		}
+
+
 
 		this._super(me.Entity, "update", [delta]);
 		return true;
