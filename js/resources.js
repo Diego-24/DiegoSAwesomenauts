@@ -33,11 +33,13 @@ game.resources = [
 	 * @example
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
 	 */
+	 /*loads the song*/
 	 {name: "marley", type: "audio", src: "data/bgm/"},
 
 	/* Sound effects. 
 	 * @example
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
+	 /*loads the sound effect*/
 	 {name: "jump", type: "audio", src: "data/sfx/"}
 ];
