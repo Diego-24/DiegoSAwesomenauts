@@ -41,5 +41,6 @@ game.resources = [
 	 * {name: "example_sfx", type: "audio", src: "data/sfx/"}
 	 */
 	 /*loads the sound effect*/
-	 {name: "jump", type: "audio", src: "data/sfx/"}
+	 {name: "jump", type: "audio", src: "data/sfx/"},
+	 {name: "cling", type: "audio", src: "data/sfx/"}
 ];

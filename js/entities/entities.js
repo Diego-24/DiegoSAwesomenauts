@@ -68,6 +68,8 @@ game.PlayerEntity = me.Entity.extend({
 				/*from the first animation, not whatever we left off when we*/
 				/*switched to another animation*/
 				this.renderable.setAnimationFrame();
+				/*plays the sound effect*/
+				me.audio.play("cling");
 			}
 		}
 		/*sets the animation 'walk'*/
