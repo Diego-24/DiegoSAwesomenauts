@@ -121,6 +121,7 @@ game.PlayerEntity = me.Entity.extend({
 				this.lastHit = this.now;
 				response.b.loseHealth();
 			}
+		/*stops the player from moving when collided against a creep*/
 		}else if(response.b.type==='EnemyCreep') {
 			var xdif = this.pos.x - response.b.pos.x;
 			var ydif = this.pos.y - response.b.pos.y;
@@ -136,12 +137,13 @@ game.PlayerEntity = me.Entity.extend({
 					this.body.vel.x = 0;
 				}
 			}
-			
+			/*sets the amount of hits it needs for the creep to die*/
 			if(this.renderable.isCurrentAnimation("attack") && this.now-this.lastHit >= 900
 					&& (Math.abs(ydif) <=40) && 
 					(((xdif>0) && this.facing==="left") || ((xdif<0) && this.facing==="right"))
 					){
 				this.lastHit = this.now;
+				/*takes away one health when creep is hit*/
 				response.b.loseHealth(1);
 			}
 		}
@@ -339,6 +341,7 @@ game.EnemyCreep = me.Entity.extend({
 				/*damage of 1*/
 				response.b.loseHealth(1);
 			}
+		/*stops the creep from moving when collided against the player*/
 		}else if (response.b.type==='PlayerEntity') {
 			var xdif = this.pos.x - response.b.pos.x;
 
