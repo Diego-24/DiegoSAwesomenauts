@@ -9,6 +9,8 @@ game.PlayScreen = me.ScreenObject.extend({
 		/*loads level01*/
 		me.levelDirector.loadLevel("level01");
 
+		this.resetPlayer(0, 420);
+
 		/*adds the player by pulling from pool*/
 		var player = me.pool.pull("player", 0, 420, {});
 		/*adds player to the game*/
@@ -31,7 +33,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
 		/*plays the song in the background when the game starts*/
-		me.audio.playTrack("marley");
+		me.audio.playTrack("8 bit superhero");
 	},
 
 
@@ -41,5 +43,10 @@ game.PlayScreen = me.ScreenObject.extend({
 	onDestroyEvent: function() {
 		// remove the HUD from the game world
 		me.game.world.removeChild(this.HUD);
+	},
+
+	resetPlayer: function(x, y){
+		game.data.player = me.pool.pull("player", x, y, {});
+		me.game.world.addChild(game.data.player, 5);
 	}
 });

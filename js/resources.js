@@ -34,7 +34,7 @@ game.resources = [
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
 	 */
 	 /*loads the song*/
-	 {name: "marley", type: "audio", src: "data/bgm/"},
+	 {name: "8 bit superhero", type: "audio", src: "data/bgm/"},
 
 	/* Sound effects. 
 	 * @example

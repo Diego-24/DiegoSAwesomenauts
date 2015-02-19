@@ -38,9 +38,6 @@ game.PlayerEntity = me.Entity.extend({
 
 		if(this.health <= 0){
 			this.dead = true;
-			this.pos.x = 10;
-			this.pos.y = 0;
-			this.health = game.data.playerHealth;
 		}
 
 		if(me.input.isKeyPressed("right")) {
@@ -117,11 +114,11 @@ game.PlayerEntity = me.Entity.extend({
 			/*stops player from going through from the right*/
 			}else if(xdif>-35 && this.facing==='right' && (xdif<0)) {
 				this.body.vel.x = 0;
-				this.pos.x = this.pos.x -1;
+				//this.pos.x = this.pos.x -1;
 			/*stops player from going through from the left*/
 			}else if(xdif<70 && this.facing==='left' && (xdif>0)) {
 				this.body.vel.x = 0;
-				this.pos.x = this.pos.x +1;
+				//this.pos.x = this.pos.x +1;
 
 			}
 		
@@ -133,15 +130,15 @@ game.PlayerEntity = me.Entity.extend({
 		/*stops the player from moving when collided against a creep*/
 		}else if(response.b.type==='EnemyCreep') {
 			var xdif = this.pos.x - response.b.pos.x;
-			var ydif = this.pos.y - response.b.pos.y;l
+			var ydif = this.pos.y - response.b.pos.y;
 
 			if(xdif>0) {
-				this.pos.x = this.pos.x + 1;
+				//this.pos.x = this.pos.x + 1;
 				if(this.facing==="left") {
 					this.body.vel.x = 0;
 				}
 			}else{
-				this.pos.x = this.pos.x - 1;
+				//this.pos.x = this.pos.x - 1;
 				if(this.facing==="right") {
 					this.body.vel.x = 0;
 				}
@@ -324,10 +321,10 @@ game.EnemyCreep = me.Entity.extend({
 	
 
 		/*makes the creeps jump*/
-		if(!this.body.jumping && !this.body.falling) {
+		/*if(!this.body.jumping && !this.body.falling) {
 			this.body.jumping = true;
 			this.body.vel.y -= this.body.accel.y * me.timer.tick;
-		}
+		}*/
 
 
 
@@ -388,6 +385,11 @@ game.GameManager = Object.extend({
 
 	update: function() {
 		this.now = new Date().getTime();
+
+		if(game.data.player.dead){
+			me.game.world.removeChild(game.data.player);
+			me.state.current().resetPlayer(10, 0);
+		}
 
 		if(Math.round(this.now/1000)%10 ===0 && (this.now - this.lastCreep >= 1000)) {
 			this.lastCreep = this.now;
