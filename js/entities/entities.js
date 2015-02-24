@@ -97,7 +97,7 @@ game.PlayerEntity = me.Entity.extend({
 	},
 
 	loseHealth: function(damage) {
-		this.health = this.health = damage;
+		this.health = this.health - damage;
 		console.log(this.health);
 	},
 
@@ -306,14 +306,13 @@ game.EnemyCreep = me.Entity.extend({
 
 	/*makes the creep move*/
 	update: function(delta) {
-		console.log(this.health);
 		if(this.health <= 0) {
 			me.game.world.removeChild(this);
 		}
 
 		this.now = new Date().getTime();
 
-		this.body.vel.x -= this.body.accel.x * me.timer.tick;
+		this.body.vel.x-= this.body.accel.x * me.timer.tick;
 
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
 
