@@ -46,6 +46,7 @@ game.PlayerEntity = me.Entity.extend({
 		/*keeps track of which direction your character is going*/
 		this.facing = "right";
 		this.dead = false;
+		this.attacking = false;
 	},
 
 	addAnimation: function() {
@@ -57,40 +58,12 @@ game.PlayerEntity = me.Entity.extend({
 
 	update: function(delta) {
 		this.now = new Date().getTime();
-
 		this.dead = checkIfDead();
-
 		this.checkKeyPressesAndMove();
-
-		
-
-		if(me.input.isKeyPressed("attack")) {
-			if(!this.renderable.isCurrentAnimation("attack")) {
-				/*Sets the current animation to attack and once that is over*/
-				/*goes back to the idle animation*/
-				this.renderable.setCurrentAnimation("attack", "idle");
-				/*Makes it so that the next time we start this sequence we begin*/
-				/*from the first animation, not whatever we left off when we*/
-				/*switched to another animation*/
-				this.renderable.setAnimationFrame();
-				/*plays the sound effect*/
-				me.audio.play("cling");
-			}
-		}
-		/*sets the animation 'walk'*/
-		else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
-			if(!this.renderable.isCurrentAnimation("walk")) {
-				this.renderable.setCurrentAnimation("walk");
-			}
-		}else if(!this.renderable.isCurrentAnimation("attack")) {
-			/*when staying still, it sets the animation 'idle'*/
-			this.renderable.setCurrentAnimation("idle");
-		}
-
+		this.setAnimation();
 		/*tells it to check the collision*/
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
 		this.body.update(delta);
-
 		this._super(me.Entity, "update", [delta]);
 		return true;
 	},
@@ -115,6 +88,8 @@ game.PlayerEntity = me.Entity.extend({
 		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
 			this.jump();
 		}
+
+		this.attacking = me.input.isKeyPressed("attack");
 	},
 
 	moveRight: function() {
@@ -138,6 +113,31 @@ game.PlayerEntity = me.Entity.extend({
 		this.body.vel.y -= this.body.accel.y * me.timer.tick;
 		/*plays the sound effect*/
 		me.audio.play("jump");
+	},
+
+	setAnimation: function() {
+		if(this.attacking) {
+			if(!this.renderable.isCurrentAnimation("attack")) {
+				/*Sets the current animation to attack and once that is over*/
+				/*goes back to the idle animation*/
+				this.renderable.setCurrentAnimation("attack", "idle");
+				/*Makes it so that the next time we start this sequence we begin*/
+				/*from the first animation, not whatever we left off when we*/
+				/*switched to another animation*/
+				this.renderable.setAnimationFrame();
+				/*plays the sound effect*/
+				me.audio.play("cling");
+			}
+		}
+		/*sets the animation 'walk'*/
+		else if(this.body.vel.x !== 0 && !this.renderable.isCurrentAnimation("attack")) {
+			if(!this.renderable.isCurrentAnimation("walk")) {
+				this.renderable.setCurrentAnimation("walk");
+			}
+		}else if(!this.renderable.isCurrentAnimation("attack")) {
+			/*when staying still, it sets the animation 'idle'*/
+			this.renderable.setCurrentAnimation("idle");
+		}
 	},
 
 	loseHealth: function(damage) {

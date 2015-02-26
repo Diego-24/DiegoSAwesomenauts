@@ -66,13 +66,10 @@ game.EnemyCreep = me.Entity.extend({
 
 		this.body.update(delta);
 	
-
 		/*makes the creeps jump*/
 		if(!this.body.jumping && !this.body.falling) {
 			this.jump();
 		}
-
-
 
 		this._super(me.Entity, "update", [delta]);
 		return true;
