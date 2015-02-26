@@ -36,7 +36,7 @@ game.resources = [
 	 * {name: "example_bgm", type: "audio", src: "data/bgm/"},
 	 */
 	 /*loads the song*/
-	 {name: "inspector norse", type: "audio", src: "data/bgm/"},
+	 {name: "Awesomenauts-tune", type: "audio", src: "data/bgm/"},
 
 	/* Sound effects. 
 	 * @example

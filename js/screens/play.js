@@ -33,7 +33,7 @@ game.PlayScreen = me.ScreenObject.extend({
 		this.HUD = new game.HUD.Container();
 		me.game.world.addChild(this.HUD);
 		/*plays the song in the background when the game starts*/
-		me.audio.playTrack("inspector norse");
+		me.audio.playTrack("Awesomenauts-tune");
 	},
 
 
