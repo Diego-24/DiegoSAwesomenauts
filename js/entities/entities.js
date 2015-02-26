@@ -1,5 +1,20 @@
 game.PlayerEntity = me.Entity.extend({
 	init: function(x, y, settings) {
+		this.setSuper();
+		this.setPlayerTimers();
+		this.setAttributes();
+		this.type = "PlayerEntity";
+		this.setFlags();
+		
+		/*the camera follows the player*/
+		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
+
+		this.addAnimation();
+
+		this.renderable.setCurrentAnimation("idle");
+	},
+
+	setSuper: function() {
 		/*reaches to the constructor of Entity*/
 		this._super(me.Entity, 'init', [x, y, {
 			/*chooses the player and sets its size*/
@@ -13,25 +28,31 @@ game.PlayerEntity = me.Entity.extend({
 				return(new me.Rect(0, 0, 64, 64)).toPolygon();
 			}
 		}]);
-		this.type = "PlayerEntity";
-		this.health = game.data.playerHealth;
-		this.body.setVelocity(game.data.playerMoveSpeed, 20);
-		/*keeps track of which direction your character is going*/
-		this.facing = "right";
+	},
+
+	setPlayerTimers: function() {
 		this.now = new Date().getTime();
 		this.lastHit = this.now;
-		this.dead = false;
-		this.attack = game.data.playerAttack;
 		this.lastAttack = new Date().getTime(); /*haven't used this*/
-		/*the camera follows the player*/
-		me.game.viewport.follow(this.pos, me.game.viewport.AXIS.BOTH);
+	},
 
+	setAttributes: function() {
+		this.health = game.data.playerHealth;
+		this.body.setVelocity(game.data.playerMoveSpeed, 20);
+		this.attack = game.data.playerAttack;
+	},
+
+	setFlags: function() {
+		/*keeps track of which direction your character is going*/
+		this.facing = "right";
+		this.dead = false;
+	},
+
+	addAnimation: function() {
 		/*adds the pictures of the character*/
 		this.renderable.addAnimation("idle", [78]);
 		this.renderable.addAnimation("walk", [117, 118, 119, 120, 121, 122, 123, 124, 125], 80);
 		this.renderable.addAnimation("attack", [221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234], 80);
-
-		this.renderable.setCurrentAnimation("idle");
 	},
 
 	update: function(delta) {
