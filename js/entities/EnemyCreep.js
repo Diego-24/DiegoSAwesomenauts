@@ -1,6 +1,18 @@
 game.EnemyCreep = me.Entity.extend({
-		init: function(x, y, settings) {
-			/*reaches to the constructor of Entity*/
+	init: function(x, y, settings) {
+		this.setSuper();
+		this.setEnemyTimers();
+		this.setAttributes();
+		this.type = "EnemyCreep";
+		
+		this.addAnimation();
+		
+		this.renderable.setCurrentAnimation("walk");
+
+	},	
+
+	setSuper: function() {
+		/*reaches to the constructor of Entity*/
 		this._super(me.Entity, 'init', [x, y, {
 			/*chooses the creep and sets its size*/
 			image: "creep1",
@@ -13,25 +25,29 @@ game.EnemyCreep = me.Entity.extend({
 				return (new me.Rect(0, 0, 32, 64)).toPolygon();
 			}
 		}]);
-		/*gives it a health*/
-		this.health = game.data.enemyCreepHealth;
-		this.alwaysUpdate = true;
-		/*this.attacking lets us know if the enemy is currently attacking*/
-		this.attacking = false;
+	},
+
+	setEnemyTimers: function() {
 		/*keeps track of when our creep last attacked anything*/
 		this.lastAttacking = new Date().getTime();
 		/*keeps track of the last time our creep hit anything*/
 		this.lastHit = new Date().getTime();
 		this.now = new Date().getTime();
-		this.body.setVelocity(3, 20);
+	},
 
-		this.type = "EnemyCreep";
+	setAttributes: function() {
+		/*gives it a health*/
+		this.health = game.data.enemyCreepHealth;
+		this.alwaysUpdate = true;
+		/*this.attacking lets us know if the enemy is currently attacking*/
+		this.attacking = false;
+		this.body.setVelocity(3, 20);	
+	},
 
+	addAnimation: function() {
 		/*adds the pictures of the creep*/
 		this.renderable.addAnimation("walk", [3, 4, 5], 80);
-		this.renderable.setCurrentAnimation("walk");
-
-	},	
+	},
 
 	loseHealth: function(damage) {
 		this.health = this.health - damage;

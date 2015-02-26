@@ -1,9 +1,17 @@
 /*puts the creep on a timer*/
 game.GameManager = Object.extend({
 	init: function(x, y, settings) {
+		this.setTimers();
+		this.setAttributes();
+	},
+
+	setTimers: function() {
 		this.now = new Date().getTime();
 		this.lastCreep = new Date().getTime();
 		this.paused = false;
+	},
+
+	setAttributes: function() {
 		this.alwaysUpdate = true;
 	},
 
