@@ -58,33 +58,11 @@ game.PlayerEntity = me.Entity.extend({
 	update: function(delta) {
 		this.now = new Date().getTime();
 
-		if(this.health <= 0){
-			this.dead = true;
-		}
+		this.dead = checkIfDead();
 
-		if(me.input.isKeyPressed("right")) {
-			/*adds to the position of my x by adding the velocity defined above in*/
-			/*setVelocity() and multiplying it by me.timer.tick.*/
-			/*me.timer.tick makes the movement look smooth*/
-			this.body.vel.x += this.body.accel.x * me.timer.tick;
-			this.facing = "right";
-			/*flips the pictures of the character*/
-			this.flipX(true);
-		/*does everything as the 'right' if statement except it's doing it for 'left'*/
-		}else if(me.input.isKeyPressed("left")) {
-			this.body.vel.x -= this.body.accel.x * me.timer.tick;
-			this.facing = "left";
-			this.flipX(false);
-		}else{
-			this.body.vel.x = 0;
-		}
-		/*allows you to jump by pressing up but not when you're falling or already jumping*/
-		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
-			this.body.jumping = true;
-			this.body.vel.y -= this.body.accel.y * me.timer.tick;
-			/*plays the sound effect*/
-			me.audio.play("jump");
-		}
+		this.checkKeyPressesAndMove();
+
+		
 
 		if(me.input.isKeyPressed("attack")) {
 			if(!this.renderable.isCurrentAnimation("attack")) {
@@ -115,6 +93,51 @@ game.PlayerEntity = me.Entity.extend({
 
 		this._super(me.Entity, "update", [delta]);
 		return true;
+	},
+
+	checkIfDead: function() {
+		if(this.health <= 0){
+			return true;
+		}
+		return false;
+	},
+
+	checkKeyPressesAndMove: function() {
+		if(me.input.isKeyPressed("right")) {
+			this.moveRight();
+		/*does everything as the 'right' if statement except it's doing it for 'left'*/
+		}else if(me.input.isKeyPressed("left")) {
+			this.moveLeft();
+		}else{
+			this.body.vel.x = 0;
+		}
+		/*allows you to jump by pressing up but not when you're falling or already jumping*/
+		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
+			this.jump();
+		}
+	},
+
+	moveRight: function() {
+		/*adds to the position of my x by adding the velocity defined above in*/
+			/*setVelocity() and multiplying it by me.timer.tick.*/
+			/*me.timer.tick makes the movement look smooth*/
+			this.body.vel.x += this.body.accel.x * me.timer.tick;
+			this.facing = "right";
+			/*flips the pictures of the character*/
+			this.flipX(true);
+	},
+
+	moveLeft: function() {
+		this.body.vel.x -= this.body.accel.x * me.timer.tick;
+		this.facing = "left";
+		this.flipX(false);
+	},
+
+	jump: function() {
+		this.body.jumping = true;
+		this.body.vel.y -= this.body.accel.y * me.timer.tick;
+		/*plays the sound effect*/
+		me.audio.play("jump");
 	},
 
 	loseHealth: function(damage) {
