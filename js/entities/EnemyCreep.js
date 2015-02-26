@@ -55,11 +55,10 @@ game.EnemyCreep = me.Entity.extend({
 
 	/*makes the creep move*/
 	update: function(delta) {
-		if(this.health <= 0) {
-			me.game.world.removeChild(this);
-		}
-
+		
 		this.now = new Date().getTime();
+
+		this.dead = checkIfDead();
 
 		this.body.vel.x-= this.body.accel.x * me.timer.tick;
 
@@ -70,14 +69,24 @@ game.EnemyCreep = me.Entity.extend({
 
 		/*makes the creeps jump*/
 		if(!this.body.jumping && !this.body.falling) {
-			this.body.jumping = true;
-			this.body.vel.y -= this.body.accel.y * me.timer.tick;
+			this.jump();
 		}
 
 
 
 		this._super(me.Entity, "update", [delta]);
 		return true;
+	},
+
+	checkIfDead: function() {
+		if(this.health <= 0) {
+			me.game.world.removeChild(this);
+		}
+	},
+
+	jump: function() {
+		this.body.jumping = true;
+		this.body.vel.y -= this.body.accel.y * me.timer.tick;
 	},
 
 	collideHandler: function(response) {

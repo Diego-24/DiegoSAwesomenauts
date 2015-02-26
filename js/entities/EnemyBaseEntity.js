@@ -42,19 +42,28 @@ game.EnemyBaseEntity = me.Entity.extend({
 
 	/*sets what happens when the tower health is at 0*/
 	update:function(delta) {
-		if(this.health<=0) {
-			this.broken = true;
-			/*sets the picture of the burning tower when the health is at zero*/
-			this.renderable.setCurrentAnimation("broken");
-		}
+		this.dead = checkIfDestroyed();
+		
 		this.body.update(delta);
 	
 		this._super(me.Entity, "update", [delta]);
 		return true;
 		if(me.input.isKeyPressed("jump") && !this.body.jumping && !this.body.falling) {
-			this.jumping = true;
-			this.body.vel.y -= this.body.accel.y * me.timer.tick;
+			this.jump();
 		}
+	},
+
+	checkIfDestroyed: function() {
+		if(this.health<=0) {
+			this.broken = true;
+			/*sets the picture of the burning tower when the health is at zero*/
+			this.renderable.setCurrentAnimation("broken");
+		}
+	},
+
+	jump: function() {
+		this.jumping = true;
+		this.body.vel.y -= this.body.accel.y * me.timer.tick;
 	},
 
 	onCollision: function() {

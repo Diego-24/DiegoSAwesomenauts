@@ -42,15 +42,20 @@ game.PlayerBaseEntity = me.Entity.extend({
 
 	/*sets what happens when the tower health is at 0*/
 	update:function(delta) {
+		this.dead = checkIfDestroyed();
+		
+		this.body.update(delta);
+	
+		this._super(me.Entity, "update", [delta]);
+		return true;
+	},
+
+	checkIfDestroyed: function() {
 		if(this.health<=0) {
 			this.broken = true;
 			/*sets the picture of the burning tower when the health is at zero*/
 			this.renderable.setCurrentAnimation("broken");
 		}
-		this.body.update(delta);
-	
-		this._super(me.Entity, "update", [delta]);
-		return true;
 	},
 
 	loseHealth: function(damage) {
