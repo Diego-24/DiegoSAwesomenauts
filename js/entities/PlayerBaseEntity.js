@@ -1,6 +1,6 @@
 game.PlayerBaseEntity = me.Entity.extend({
 	init : function(x, y, settings){
-		this.setSuper();
+		this.setSuper(x, y);
 		this.setAttributes();
 		this.type = "PlayerBase";
 
@@ -10,7 +10,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 		this.renderable.setCurrentAnimation("idle");
 	},
 
-	setSuper:function() {
+	setSuper:function(x, y) {
 		/*reaches to the constructor of Entity*/
 		this._super(me.Entity, 'init', [x, y, {
 			/*chooses the tower and sets the size*/
@@ -42,7 +42,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 
 	/*sets what happens when the tower health is at 0*/
 	update:function(delta) {
-		this.dead = checkIfDestroyed();
+		this.dead = this.checkIfDestroyed();
 		
 		this.body.update(delta);
 	

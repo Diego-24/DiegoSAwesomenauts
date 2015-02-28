@@ -1,6 +1,6 @@
 game.EnemyCreep = me.Entity.extend({
 	init: function(x, y, settings) {
-		this.setSuper();
+		this.setSuper(x, y);
 		this.setEnemyTimers();
 		this.setAttributes();
 		this.type = "EnemyCreep";
@@ -11,7 +11,7 @@ game.EnemyCreep = me.Entity.extend({
 
 	},	
 
-	setSuper: function() {
+	setSuper: function(x, y) {
 		/*reaches to the constructor of Entity*/
 		this._super(me.Entity, 'init', [x, y, {
 			/*chooses the creep and sets its size*/
@@ -58,7 +58,7 @@ game.EnemyCreep = me.Entity.extend({
 		
 		this.now = new Date().getTime();
 
-		this.dead = checkIfDead();
+		this.dead = this.checkIfDead();
 
 		this.body.vel.x-= this.body.accel.x * me.timer.tick;
 

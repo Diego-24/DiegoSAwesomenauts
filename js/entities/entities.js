@@ -1,6 +1,6 @@
 game.PlayerEntity = me.Entity.extend({
 	init: function(x, y, settings) {
-		this.setSuper();
+		this.setSuper(x, y);
 		this.setPlayerTimers();
 		this.setAttributes();
 		this.type = "PlayerEntity";
@@ -14,7 +14,7 @@ game.PlayerEntity = me.Entity.extend({
 		this.renderable.setCurrentAnimation("idle");
 	},
 
-	setSuper: function() {
+	setSuper: function(x, y) {
 		/*reaches to the constructor of Entity*/
 		this._super(me.Entity, 'init', [x, y, {
 			/*chooses the player and sets its size*/
@@ -58,7 +58,7 @@ game.PlayerEntity = me.Entity.extend({
 
 	update: function(delta) {
 		this.now = new Date().getTime();
-		this.dead = checkIfDead();
+		this.dead = this.checkIfDead();
 		this.checkKeyPressesAndMove();
 		this.setAnimation();
 		/*tells it to check the collision*/
