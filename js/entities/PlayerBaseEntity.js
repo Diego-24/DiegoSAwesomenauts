@@ -53,6 +53,7 @@ game.PlayerBaseEntity = me.Entity.extend({
 	checkIfDestroyed: function() {
 		if(this.health<=0) {
 			this.broken = true;
+			game.data.win = false;
 			/*sets the picture of the burning tower when the health is at zero*/
 			this.renderable.setCurrentAnimation("broken");
 		}
