@@ -16,9 +16,13 @@ game.PlayScreen = me.ScreenObject.extend({
 		/*adds player to the game*/
 		//me.game.world.addChild(player, 5);
 
-		var gamemanager = me.pool.pull("GameManager", 0, 0, {});
-		/*adds the gamemanager to the game*/
-		me.game.world.addChild(gamemanager, 0);
+		var gameTimerManager = me.pool.pull("GameTimerManager", 0, 0, {});
+		/*adds the gameTimerManager to the game*/
+		me.game.world.addChild(gameTimerManager, 0);
+
+		var herDeathManager = me.pool.pull("HeroDeathManager", 0, 0, {});
+		/*adds the heroDeathManager to the game*/
+		me.game.world.addChild(heroDeathManager, 0);
 
 		/*binds the right key so when pressed the player moves right*/
 		me.input.bindKey(me.input.KEY.RIGHT, "right");
