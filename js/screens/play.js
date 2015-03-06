@@ -8,7 +8,6 @@ game.PlayScreen = me.ScreenObject.extend({
 
 		/*loads level01*/
 		me.levelDirector.loadLevel("level01");
-
 		this.resetPlayer(0, 420);
 
 		/*adds the player by pulling from pool*/
