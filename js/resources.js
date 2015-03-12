@@ -40,6 +40,7 @@ game.resources = [
 	 {name: "Awesomenauts-tune", type: "audio", src: "data/bgm/"},
 	 {name: "Awesomenauts-upgradeTune", type: "audio", src: "data/bgm/"},
 	 {name: "Awesomenauts-partyTune", type: "audio", src: "data/bgm/"},
+	 {name: "SaintsRow", type: "audio", src: "data/bgm/"},
 
 	/* Sound effects. 
 	 * @example
