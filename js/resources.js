@@ -21,7 +21,7 @@ game.resources = [
 	 /*loads the gold screen*/
 	 {name: "gold-screen", type:"image", src: "data/img/spend.png"},
 	 {name: "load-screen", type:"image", src: "data/img/loadpic.png"},
-	 {name: "new-screen", type:"image", src: "data/img/newpic.png"},
+	 {name: "new-screen", type:"image", src: "data/img/awesomenauts2.jpg"},
 
 	/* Atlases 
 	 * @example
