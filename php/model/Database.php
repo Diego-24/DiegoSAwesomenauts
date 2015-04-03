@@ -30,10 +30,6 @@ class Database {
 			/*Sends a command to make a database*/
 			$query = $this->connection->query("CREATE DATABASE $database");
 
-			/*this if statement echos that the database was created*/
-			if ($query) {
-				echo "<p>Successfully creaated database: " . $database . "</p>";
-			}
 
 		}
 		/*this else statement is echoing that my database exists*/
