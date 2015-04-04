@@ -33,6 +33,7 @@ game.PlayerEntity = me.Entity.extend({
 	setPlayerTimers: function() {
 		this.now = new Date().getTime();
 		this.lastHit = this.now;
+		this.lastIArrow = this.now;
 		this.lastAttack = new Date().getTime(); /*haven't used this*/
 	},
 
@@ -60,6 +61,7 @@ game.PlayerEntity = me.Entity.extend({
 		this.now = new Date().getTime();
 		this.dead = this.checkIfDead();
 		this.checkKeyPressesAndMove();
+		this.checkAbilityKeys();
 		this.setAnimation();
 		/*tells it to check the collision*/
 		me.collision.check(this, true, this.collideHandler.bind(this), true);
@@ -113,6 +115,24 @@ game.PlayerEntity = me.Entity.extend({
 		this.body.vel.y -= this.body.accel.y * me.timer.tick;
 		/*plays the sound effect*/
 		me.audio.play("jump");
+	},
+
+	checkAbilityKeys: function() {
+		if(me.input.isKeyPressed("skill1")){
+			//this.speedBurst();
+		}else if(me.input.isKeyPressed("skill2")){
+			//this.eatCreep();
+		}else if(me.input.isKeyPressed("skill3")){
+			this.shootIArrow();
+		}
+	},
+
+	shootIArrow: function() {
+		if(this.lastIArrow >= game.data.iArrowTimer && game.data.ability3 >= 0){
+			this.lastIArrow = this.now;
+			var iArrow = me.pool.pull("iArrow", this.pos.x, this.pos.y, {});
+			me.game.world.addChild(iArrow, 10);
+		}
 	},
 
 	setAnimation: function() {

@@ -17,11 +17,12 @@ game.resources = [
 	 /*loads the title screen*/
 	 {name: "title-screen", type:"image", src: "data/img/Awesomenauts.jpg"},
 	 /*loads the upgrade screen*/
-	 {name: "exp-screen", type:"image", src: "data/img/loadpic.png"},
+	 {name: "exp-screen", type:"image", src: "data/img/loadingscreen.jpg"},
 	 /*loads the gold screen*/
-	 {name: "gold-screen", type:"image", src: "data/img/spend.png"},
-	 {name: "load-screen", type:"image", src: "data/img/loadpic.png"},
+	 {name: "gold-screen", type:"image", src: "data/img/storebackground.jpg"},
+	 {name: "load-screen", type:"image", src: "data/img/loadingscreen.jpg"},
 	 {name: "new-screen", type:"image", src: "data/img/awesomenauts2.jpg"},
+	 {name: "iArrow", type:"image", src: "data/img/iArrow.png"},
 
 	/* Atlases 
 	 * @example

@@ -17,6 +17,7 @@ var game = {
 		creepMoveSpeed: 5,
 		gameTimerManager: "",
 		heroDeathManager: "",
+		iArrowTimer: 15,
 		player: "",
 		exp: 0,
 		gold: 0,
@@ -87,6 +88,7 @@ var game = {
 		me.pool.register("ExperienceManager", game.ExperienceManager);
 		/*registers SpendGold*/
 		me.pool.register("SpendGold", game.SpendGold);
+		me.pool.register("iArrow", game.IArrowShot);
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());

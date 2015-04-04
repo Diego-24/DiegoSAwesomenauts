@@ -32,11 +32,7 @@ class Database {
 
 
 		}
-		/*this else statement is echoing that my database exists*/
-		else {
-			echo "<p>Database already exists.</p>";
-
-		}
+		
 	} 
 
 	/*opens the connection*/
