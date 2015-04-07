@@ -37,7 +37,8 @@ var game = {
 		pausePos: "",
 		buyscreen: "",
 		buytext: "",
-		minimap: ""
+		minimap: "",
+		miniPlayer: ""
 	},
 	
 	
