@@ -36,7 +36,8 @@ var game = {
 		win: "",
 		pausePos: "",
 		buyscreen: "",
-		buytext: ""
+		buytext: "",
+		minimap: ""
 	},
 	
 	
@@ -90,7 +91,8 @@ var game = {
 		me.pool.register("ExperienceManager", game.ExperienceManager);
 		/*registers SpendGold*/
 		me.pool.register("SpendGold", game.SpendGold);
-		me.pool.register("iArrow", game.IArrowShot);
+		me.pool.register("iArrow", game.IArrowShot, true);
+		me.pool.register("minimap", game.MiniMap, true);
 
 		me.state.set(me.state.MENU, new game.TitleScreen());
 		me.state.set(me.state.PLAY, new game.PlayScreen());
