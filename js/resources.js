@@ -23,6 +23,7 @@ game.resources = [
 	 {name: "load-screen", type:"image", src: "data/img/loadingscreen.jpg"},
 	 {name: "new-screen", type:"image", src: "data/img/awesomenauts2.jpg"},
 	 {name: "iArrow", type:"image", src: "data/img/iArrow.png"},
+	 {name: "minimap", type:"image", src: "data/img/minimap.png"},
 
 	/* Atlases 
 	 * @example
